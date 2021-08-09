@@ -1,0 +1,46 @@
+// @Author: WilliamJiangy
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+using ull = unsigned long long;
+ 
+#define testcase() {int t; cin >> t; while(t--) {solve();}}
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)(x).size())
+#define pb push_back
+#define ar array
+#define bug() cout << "######PLEASE_NO_BUG######\n"
+ 
+void solve() {
+	int h, w, n;
+	cin >> h >> w >> n;
+	ar<int, 2> a[n];
+	set<int> _h, _w;
+	for(int i = 0; i < n; i++) {
+		cin >> a[i][0] >> a[i][1];
+		_h.insert(a[i][0]);
+		_w.insert(a[i][1]);
+	}
+	vector<int> _H, _W;
+	for(int i : _h) _H.push_back(i);
+	for(int i : _w) _W.push_back(i);
+	ar<int, 2> ans[n];
+	for(int i = 0; i < n; i++) {
+		int l = lower_bound(all(_H), a[i][0]) - _H.begin();
+		int r = lower_bound(all(_W), a[i][1]) - _W.begin();
+//		cout << l << " " << r << "\n";
+		ans[i][0] = l;
+		ans[i][1] = r;
+	}
+	for(int i = 0; i < n; i++) {
+		cout << ans[i][0] + 1 << " " << ans[i][1] + 1 << "\n";
+	}
+}
+ 
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+//	testcase();
+	solve();
+	return 0;
+}
